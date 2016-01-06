@@ -1,0 +1,116 @@
+//public
+.no-pd{
+	padding:0;
+}
+.no-pd-left{
+	padding-left:0;
+}
+.no-pd-right{
+	padding-right:0;
+}
+
+.sidebar-box{
+	border-right:2px solid #e9e9e9;
+	line-height:42px;
+	color:#666;
+	font-size:12px;
+	.sidebar-menu{
+		padding-left:0;
+		display:block;
+		position:relative;
+		z-index:99;
+		>.sidebar-menu-sub{
+			list-style-type: none;
+			cursor: pointer;
+			position:relative;
+			>.sidebar-menu{
+				display:none;
+			}
+			&:hover{
+				background:#B8EFFF;
+				&:before{
+					content:"";
+					position:absolute;
+					right:-2px;
+					top:5px;
+					//border: 1px solid transparent;
+					//border-width:12px 8px;
+					//border-right-color:#2b7dbc;
+				}
+				// &:after{
+				// 	content:"";
+				// 	position:absolute;
+				// 	right:-2px;
+				// 	top:0;
+				// 	height:42px;
+				// 	border-right:2px solid #2b7dbc;
+				// }
+
+			}
+			&.active{
+				color:#2db7f5;
+				&:after{
+					content:"";
+					position:absolute;
+					right:-2px;
+					top:0;
+					height:100%;
+					border-right:2px solid #2b7dbc;
+				}
+				&:before{
+					content:"";
+					position:absolute;
+					right:-2px;
+					top:5px;
+					//border: 1px solid transparent;
+					//border-width:12px 8px; 
+					//border-right-color:#2b7dbc;
+				}
+			}
+			>.sidebar-menu-sub-title{
+				//color:#2db7f5;
+				padding-right:16px;
+			}
+			&.open{
+				> .sidebar-menu{
+					display:block;
+				}
+				&:after{
+					content:"";
+					position:absolute;
+					right:-2px;
+					top:0;
+					height:100%;
+					//border-right:2px solid #2b7dbc;
+				}
+				&.active{
+					//border-right:2px solid #2b7dbc;
+				}
+				// &:hover{
+				// 	background:none;
+				// }
+					// &:before{
+					// 	display:none;
+					// }
+					// >.sidebar-menu-sub-title{
+					// 	font-weight:700;
+					// 	//color:#2db7f5;
+					// }
+					&:hover{
+						background:none
+					}
+				}
+			.sidebar-menu-sub-title{
+				.glyphicon{
+					position:absolute;
+					left:-16px;
+					top:15px;
+				}
+				&:hover{
+					background:#B8EFFF;
+				}
+				//padding-left:24px;
+			}
+		}
+	}
+}

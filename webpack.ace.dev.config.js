@@ -60,11 +60,13 @@ module.exports = {
         // exclude: /node_modules/,
         // include: __dirname
       },
-      {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&minetype=application/font-woff'},
-      {test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&minetype=application/font-woff'},
+      {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&name=resource/font/[hash].[ext]&minetype=application/font-woff'},
+      {test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&name=resource/font/[hash].[ext]&minetype=application/font-woff'},
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&minetype=application/octet-stream'},
-      {test: /\.(eot|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'},
+      {test: /\.(eot|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=resource/font/[hash].[ext]'},
       {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&minetype=image/svg+xml'},
+      // { test: /\.woff(2)?$/, loader: "url-loader?limit=10000&resource/fonts/[hash].[ext]&mimetype=application/font-woff" },
+      // { test: /\.(ttf|eot|svg)$/, loader: "file-loader" },
       {test: /\.(png|jpg|jpeg|gif)(\?v=\d+\.\d+\.\d+)?$/i, loader: 'url?limit=10000'},
       //{test: path.resolve('jquery/dist/jquery.min.js'), loader: 'expose?jQuery'}//暴露到全局
     ]

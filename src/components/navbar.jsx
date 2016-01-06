@@ -49,9 +49,11 @@ class MenuText extends React.Component{//菜单子项
 		this.props.onOpen(!this.state.open)
 	}
 	render(){
-		return(
-			<div ref="MenuText" data-open={this.state.open} onClick={::this.handleClick} style={this.props.style} className="sidebar-menu-sub-title" >{this.props.children}</div>
-		);
+		var nodeText = this.props.type ? <div data-open={this.state.open} onClick={::this.handleClick} style={this.props.style} className="sidebar-menu-sub-title" >
+			<span className={cn('glyphicon',this.props.type)}></span>{this.props.children}
+		</div> : <div data-open={this.state.open} onClick={::this.handleClick} style={this.props.style} className="sidebar-menu-sub-title" >{this.props.children}</div>
+		return nodeText;
+		
 	}
 }
 
@@ -82,7 +84,7 @@ class MenuItem extends React.Component{//菜单列表
 					menuNode 	 = menu.children ? <li
 						id={this.props.dataId}
 						className={cn('sidebar-menu-sub',open,active)}>
-						<MenuText  onOpen={::this.handleOpen} style={itemstyle} className="sidebar-menu-sub-title">{menu.title}</MenuText>
+						<MenuText  type={this.props.type} onOpen={::this.handleOpen} style={itemstyle} className="sidebar-menu-sub-title">{menu.title}</MenuText>
 						<SidebarMenu pdleft={pdleft} body={menu.children} activeClick={this.props.activeClick} activeId={this.props.activeId}/>
 					</li> : <li
 						id={this.props.dataId}
@@ -110,22 +112,27 @@ class SidebarMenu extends React.Component{//ul
 	}
 	
 	render() {
-		const { body } = this.props;
-		var pdleft = this.props.pdleft+24;
+		const { body, type, activeId, activeClick, open} = this.props;
+		var pdleft = this.props.pdleft+24,
+		nodeArr=[];
+		body.map((m,i)=>{
+			nodeArr.push(
+			<MenuItem
+				pdleft={pdleft}
+				key={'m'+i}
+				dataId={m.id}
+				menu={m}
+				activeId={activeId}
+				activeClick = {activeClick}
+				onOpen={::this.handleOpen}
+				open={open}
+				type={type?type[i]:false}
+			/>
+		)}
+				);
 		return (
 			<ul className="sidebar-menu">
-				{body.map((m,i)=>
-					<MenuItem 
-						pdleft={pdleft}
-						key={'m'+i}
-						dataId={m.id}
-						menu={m}
-						activeId={this.props.activeId}
-						activeClick = {this.props.activeClick}
-						onOpen={::this.handleOpen}
-						open={this.props.open}
-					/>
-				)}
+				{nodeArr}
 			</ul>
 		);
 	}
@@ -146,8 +153,8 @@ class Sidebar extends React.Component{ //菜单边栏
 	render() {
 		let menu2 = [
 			{
-				id:'1',
-				title: 'm1',
+				id:'yy',
+				title: '运营系统',
 				children: [
 					{
 						id: '1_1',
@@ -167,8 +174,8 @@ class Sidebar extends React.Component{ //菜单边栏
 					},
 				]
 			},{
-				id:'2',
-				title: 'm2',
+				id:'xxx',
+				title: '财务系统',
 				children: [
 					{
 						id:'2_1',
@@ -176,15 +183,18 @@ class Sidebar extends React.Component{ //菜单边栏
 					}
 				]
 			},{
-				id:'3',
-				title: 'm3',
-				
+				id:'b',
+				title: '客服系统',
+			},
+			{
+				id:'a',
+				title: '系统管理',
 			}
 		];
 		return (
 			<div className="col-xs-12 col-sm-3 col-md-2 col-lg-2 no-pd-left">
 				<div className="sidebar-box">
-					<SidebarMenu open={false} pdleft={0} body={menu2} activeClick={::this.handleActive} activeId={this.state.activeId}/>
+					<SidebarMenu type={['glyphicon-envelope', 'glyphicon-glass', 'glyphicon-heart']} open={false} pdleft={0} body={menu2} activeClick={::this.handleActive} activeId={this.state.activeId}/>
 				</div>
 			</div>
 		);

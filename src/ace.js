@@ -23,7 +23,10 @@
 //import './ace/assets/js/ace-elements.min'
 //import './ace/assets/js/ace.min'
 //
+//import './bootstrap/scss/bootstrap'
+// import './bootstrap/scss/font-awesome'
 import 'bootstrap/dist/css/bootstrap.css'
+import './font-awesome/scss/font-awesome'
 import './scss/style'
 // import './bootstrap/dist/css/bootstrap.css'
 //import './font-awesome/scss/font-awesome'

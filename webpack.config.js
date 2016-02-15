@@ -41,18 +41,18 @@ module.exports = {
         exclude: /node_modules/,
         include: __dirname
       },
-      // {
-      //   test: /\.css$/,
-      //   loader: ExtractTextPlugin.extract('css?sourceMap&-restructuring!autoprefixer'),
-      //   exclude: /node_modules/,
-      //   include: __dirname
-      // },
       {
         test: /\.css$/,
-        loaders: ['style','css?sourceMap','autoprefixer'],
+        loader: ExtractTextPlugin.extract('css?sourceMap&-restructuring!autoprefixer'),
         exclude: /node_modules/,
         include: __dirname
       },
+      // {
+      //   test: /\.css$/,
+      //   loaders: ['style','css?sourceMap','autoprefixer'],
+      //   exclude: /node_modules/,
+      //   include: __dirname
+      // },
     ]
   },
   // externals: {

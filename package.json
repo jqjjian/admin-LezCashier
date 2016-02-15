@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "build": "webpack --display-error-details--watch",
+    "build": "webpack --config webpack.ace.config.js --display-modules --display-error-details--watch -p",
     "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build",
     "start": "node server.js",
     "ace": "node ace-server.js"
@@ -39,6 +39,7 @@
   "dependencies": {
     "antd": "^0.10.0-beta16",
     "bootstrap": "^3.3.5",
+    "bootstrap-webpack": "0.0.5",
     "classnames": "^2.2.1",
     "jquery": "^2.1.4",
     "react": "^0.14.0",

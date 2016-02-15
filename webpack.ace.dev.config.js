@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
@@ -18,22 +19,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),//热替换模块(非webpack-dev模式)
-    new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('[name].css', {
-      disable: false,
-      allChunks: true
-    }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery:'jquery',
-      React: 'react',
-      ReactDOM: 'react-dom',
-      cn: 'classnames'
-    })
-  ],
+  
   module: {
     loaders: [
       {
@@ -42,35 +28,65 @@ module.exports = {
         // exclude: /node_modules/,
         // include: __dirname
       },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('css?sourceMap&-restructuring!autoprefixer'),
-        exclude: /node_modules/,
-        include: __dirname
-      },
+      // {
+      //   test: /\.css$/,
+      //   loader: ExtractTextPlugin.extract('css?sourceMap&-restructuring!autoprefixer'),
+      //   exclude: /node_modules/,
+      //   include: __dirname
+      // },
       {
         test: /\.scss$/,
         loaders: ['style','css?sourceMap','autoprefixer','sass'],
         exclude: /node_modules/,
         include: __dirname
       },
+      // {
+      //   test: /\.scss$/,
+      //   loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!sass-loader'),
+      //   exclude: /node_modules/,
+      //   include: __dirname
+      // },
       {
         test: /\.css$/,
         loaders: ['style','css?sourceMap','autoprefixer'],
         // exclude: /node_modules/,
         // include: __dirname
       },
-      {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&name=resource/font/[hash].[ext]&minetype=application/font-woff'},
-      {test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&name=resource/font/[hash].[ext]&minetype=application/font-woff'},
-      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&minetype=application/octet-stream'},
-      {test: /\.(eot|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=resource/font/[hash].[ext]'},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&minetype=image/svg+xml'},
-      // { test: /\.woff(2)?$/, loader: "url-loader?limit=10000&resource/fonts/[hash].[ext]&mimetype=application/font-woff" },
-      // { test: /\.(ttf|eot|svg)$/, loader: "file-loader" },
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&name=font/[hash].[ext]&mimetype=application/font-woff"
+      }, {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&name=font/[hash].[ext]&mimetype=application/font-woff"
+      }, {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&name=font/[hash].[ext]&mimetype=application/octet-stream"
+      }, {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file?&name=font/[hash].[ext]"
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&name=font/[hash].[ext]&mimetype=image/svg+xml"
+      },
       {test: /\.(png|jpg|jpeg|gif)(\?v=\d+\.\d+\.\d+)?$/i, loader: 'url?limit=10000'},
-      //{test: path.resolve('jquery/dist/jquery.min.js'), loader: 'expose?jQuery'}//暴露到全局
     ]
   },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),//热替换模块(非webpack-dev模式)
+    new webpack.NoErrorsPlugin(),
+    // new ExtractTextPlugin('[name].css', {
+    //   disable: false,
+    //   allChunks: true
+    // }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery:'jquery',
+      React: 'react',
+      ReactDOM: 'react-dom',
+      cn: 'classnames'
+    })
+  ],
   // externals: {
   //   "jquery": 'window.jQuery',
   //   "jquery": 'window.$',
